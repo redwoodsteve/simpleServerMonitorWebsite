@@ -25,7 +25,8 @@
 		<script defer type="text/javascript">
 			setInterval(function() {
 				let http = new XMLHttpRequest();
-				http.open("GET", window.location.hostname + "performanceDetails");
+				var dataString;
+				http.open("GET", window.location.host + "performanceDetails");
 				http.setRequestHeader("Content-Type", "application/json");
 				http.overrideMimeType("application/json");
 				http.send();
