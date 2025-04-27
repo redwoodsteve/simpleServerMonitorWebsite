@@ -1,42 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="robots" content="noindex, nofollow">
 		<link rel="stylesheet" href="style.css">
-		<title>Simple server monitor</title>
+		<title>Simple Server Monitor</title>
+		<script defer src="scripts/built/formatPage.js"></script>
+		<script defer src="scripts/built/app.js"></script>
 	</head>
-	<body>
-		<h1 id="serverName">loading..</h1>
-		<div class="stats">
-			<div id="systemCPUdisplay" class="resourceDisplay">
-				<ol class="bl">
-					<li><h2>0%</h2></li>
-					<li><p>cpu</p></li>
-				</ol>
+	<body onload="start();">
+		<noscript>You must turn on JavaScript to use this page.</noscript>
+		<header id="topBar">
+			<h1 class="header-large" id="name"><span class="skeleton-loader">insert server title here</span></h1>
+		</header>
+		<main id="dashboard">
+			<div id="dashboardBackground"></div>
+
+			<section class="container">
+				<h3 class="label">CPU</h3>
+				<div class="content">
+
+					<div class="performanceCircle">
+						<svg id="systemCPUBar" aria-label="A loading bar, reading 0%" xmlns="http://www.w3.org/2000/svg" version="1.1" width="110px" height="110px"><defs><linearGradient id="gradient"><stop offset="0%" stop-color="var(--accentColor1)"></stop><stop offset="100%" stop-color="var(--accentColor2)"></stop></linearGradient></defs><circle cx="60" cy="60" r="55" stroke-linecap="round"></circle></svg>
+						<p class="label" id="systemCPUText">--%</p>
+						<p class="label desc">System</p>
+					</div>
+
+					<div class="performanceCircle">
+						<svg id="processCPUBar" aria-label="A loading bar, reading 0%" xmlns="http://www.w3.org/2000/svg" version="1.1" width="110px" height="110px"><defs><linearGradient id="gradient"><stop offset="0%" stop-color="var(--accentColor1)"></stop><stop offset="100%" stop-color="var(--accentColor2)"></stop></linearGradient></defs><circle cx="60" cy="60" r="55" stroke-linecap="round"></circle></svg>
+						<p class="label" id="processCPUText">--%</p>
+						<p class="label desc">Process</p>
+					</div>
+
+				</div>
 				
+			</section>
+
+			<section class="container">
+				<h3 class="label">RAM</h3>
+				<div class="content">
+
+					<div class="performanceCircle">
+						<svg id="systemRAMBar" aria-label="A loading bar, reading 0%" xmlns="http://www.w3.org/2000/svg" version="1.1" width="110px" height="110px"><defs><linearGradient id="gradient"><stop offset="0%" stop-color="var(--accentColor1)"></stop><stop offset="100%" stop-color="var(--accentColor2)"></stop></linearGradient></defs><circle cx="60" cy="60" r="55" stroke-linecap="round"></circle></svg>
+						<p class="label" id="systemRAMText">--%</p>
+						<p class="label desc">System</p>
+					</div>
+
+					<div class="performanceCircle">
+						<svg id="processRAMBar" aria-label="A loading bar, reading 0%" xmlns="http://www.w3.org/2000/svg" version="1.1" width="110px" height="110px"><defs><linearGradient id="gradient"><stop offset="0%" stop-color="var(--accentColor1)"></stop><stop offset="100%" stop-color="var(--accentColor2)"></stop></linearGradient></defs><circle cx="60" cy="60" r="55" stroke-linecap="round"></circle></svg>
+						<p class="label" id="processRAMText">--%</p>
+						<p class="label desc">Process</p>
+					</div>
+
+				</div>
 				
-			</div>
-			<div id="systemRAMdisplay" class="resourceDisplay">
-				<h2>0%</h2>
-				<p>ram</p>
-			</div>
-		</div>
-		<script defer type="text/javascript">
-			setInterval(function() {
-				let http = new XMLHttpRequest();
-				var dataString;
-				http.open("GET", "http://" + window.location.host + "/performanceDetails");
-				http.setRequestHeader("Content-Type", "application/json");
-				http.overrideMimeType("application/json");
-				http.send();
-				http.onreadystatechange = function(e) {
-					if (http.readyState == 4) {
-						const response = JSON.parse(http.responseText);
-				document.getElementById("serverName").innerText = response.name;
-					}
-				}
-			}, 1000)
-		</script>
+			</section>
+
+			<section class="container">
+				<h3 class="label">Players</h3>
+				<p id="playerCount"><span class="skeleton-loader">xx/xx</span></p>
+				
+				<div id="playerList">
+					<ul id="players"></ul>
+				</div>
+			</section>
+		</main>
+		<svg id="templateIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"></svg>
 	</body>
 </html>
