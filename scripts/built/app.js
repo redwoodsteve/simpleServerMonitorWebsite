@@ -48,7 +48,7 @@ var opIcons = {
 function getPerformanceInfo() {
     return new Promise(function (resolve, reject) {
         var xhtp = new XMLHttpRequest();
-        xhtp.open("GET", window.location.host + "/performanceDetails");
+        xhtp.open("GET", "http://" + serverAddr + "/performanceDetails");
         xhtp.setRequestHeader("Content-Type", "application/json");
         var response;
         xhtp.onload = function (e) {

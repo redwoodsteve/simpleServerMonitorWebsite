@@ -28,7 +28,7 @@ function getPerformanceInfo(): Promise<Data> {
 	return new Promise((resolve, reject) => {
 
 		let xhtp = new XMLHttpRequest();
-		xhtp.open("GET", window.location.host + "/performanceDetails");
+		xhtp.open("GET", "http://" + serverAddr + "/performanceDetails");
 		xhtp.setRequestHeader("Content-Type", "application/json");
 
 		var response: Data;
