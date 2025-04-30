@@ -45,6 +45,14 @@ var opIcons = {
     "true": '<path d="M480-440q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0-80q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0 440q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-400Zm0-315-240 90v189q0 54 15 105t41 96q42-21 88-33t96-12q50 0 96 12t88 33q26-45 41-96t15-105v-189l-240-90Zm0 515q-36 0-70 8t-65 22q29 30 63 52t72 34q38-12 72-34t63-52q-31-14-65-22t-70-8Z"/>',
     "false": '<path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/>'
 };
+var asIcons = {
+    "true": '<path d="M480-200 240-440l56-56 184 183 184-183 56 56-240 240Zm0-240L240-680l56-56 184 183 184-183 56 56-240 240Z"/>',
+    "false": '<path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q54 0 104-17.5t92-50.5L228-676q-33 42-50.5 92T160-480q0 134 93 227t227 93Zm252-124q33-42 50.5-92T800-480q0-134-93-227t-227-93q-54 0-104 17.5T284-732l448 448Z"/><path d="M480-200 240-440l56-56 184 183 184-183 56 56-240 240Zm0-240L240-680l56-56 184 183 184-183 56 56-240 240Z"/>'
+};
+var themeIcons = {
+    "light": '<path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>',
+    "dark": '<path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>'
+};
 function getPerformanceInfo() {
     return new Promise(function (resolve, reject) {
         var xhtp = new XMLHttpRequest();
@@ -100,15 +108,45 @@ function updatePage() {
                         element.appendChild(div);
                         document.getElementById("players").appendChild(element);
                     });
+                    document.getElementById("log").innerHTML = "";
+                    data.log.forEach(function (value, index) {
+                        var li = document.createElement("li");
+                        li.innerText = value;
+                        document.getElementById("log").appendChild(li);
+                    });
+                    if (autoScroll) {
+                        document.getElementById("log").scroll(0, document.getElementById("log").scrollHeight);
+                    }
                     return [2];
             }
         });
     });
 }
+var autoScroll = true;
+function onLogASButtonClick() {
+    autoScroll = !autoScroll;
+    document.getElementById("asIcon").innerHTML = asIcons[autoScroll];
+}
+function onThemeButtonClick() {
+    document.getElementById("themeSelect").click();
+}
 function start() {
+    document.getElementById("asIcon").innerHTML = asIcons[autoScroll];
+    if (localStorage.getItem("theme") != null) {
+        document.body.classList.add(localStorage.getItem("theme"));
+        document.getElementById("themeIcon").innerHTML = themeIcons[localStorage.getItem("theme")];
+    }
+    else {
+        localStorage.setItem("theme", "light");
+        document.getElementById("themeIcon").innerHTML = themeIcons[localStorage.getItem("theme")];
+    }
     updatePage();
     setInterval(function () {
         updatePage();
     }, 333);
+    document.getElementById("themeSelect").onchange = function (e) {
+        localStorage.setItem("theme", document.getElementById("themeSelect").value);
+        document.body.className = localStorage.getItem("theme");
+    };
 }
 //# sourceMappingURL=app.js.map
