@@ -2,8 +2,8 @@
 body {
 	--default-font: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
 
-	--grey1: #e1e1e1;
-	--grey2: #ffffff;
+	--grey1: #d6d4d4;
+	--grey2: #dddddd;
 	--bk1: #fff;
 	--bk2: #e7e5e5;
 	--accentColor1: #74dd1d;
@@ -14,15 +14,7 @@ body {
 	font-family: var(--default-font);
 	font-optical-sizing: auto;
 	padding: 0;
-}
-body.dark {
-	--grey1: #313131;
-	--grey2: #3e3e3e;
-	--bk1: #363636;
-	--bk2: #1e1e1e;
-	--accentColor1: #74dd1d;
-	--accentColor2: #72f109;
-	color: white;
+	overflow: hidden;
 }
 
 @keyframes skeleton {
@@ -62,9 +54,8 @@ body.dark {
 	padding: 10px;
 	top: 0;
 	left: 0;
-	z-index: 10;
 }
-#dashboard, #logs {
+#dashboard {
 	margin: auto;
 	margin-top: 0 !important; 
 	width: 1500px;
@@ -72,10 +63,6 @@ body.dark {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	position: relative;
-}
-#logs {
-	display: flex;
-	flex-direction: column;
 }
 #dashboardBackground {
 	position: fixed;
@@ -123,7 +110,6 @@ body.dark {
 
 .label {
 	position: absolute;
-	top: 10px;
 }
 .label.desc {
 	font-size: 0.7em;
@@ -145,7 +131,7 @@ body.dark {
 #playerCount {
 	float: right;
 }
-#playerList, #log {
+#playerList {
 	background-color: var(--grey2);
 	min-height: calc(var(--border-radius-1) * 2);
 	max-height: 90px;
@@ -165,71 +151,20 @@ body.dark {
 	justify-content: space-between;
 }
 
-
-#log {
-	font-family: 'Courier New', Courier, monospace;
-	overflow-x: visible;
-	word-break: break-all;
-	height: 473px;
-	max-height: none;
-}
-#log > li {
-	list-style-type: none;
-	padding: 9px;
-	padding-left: 0px;
-	margin-left: -30px;
-}
-#logAS {
-	position: absolute;
-	left: 55px;
-	cursor: pointer;
-	border: none;
-	background-color: var(--grey2);
-	border-radius: var(--border-radius-1);
-	top: 10px;
-	align-content: center;
-	display: flex;
-}
-.container:has(#log) {
-	height: 500px;
-}
-
-#themeButton {
-	background-color: var(--grey2);
-	position: absolute;
-	top: 25px;
-	right: 40px;
-	border: none;
-	border-radius: var(--border-radius-1);
-	cursor: pointer;
-	display: flex;
-	align-content: center;
-	padding: 5px;
-}
-#themeButton:hover {
-	background-color: var(--grey1);
-}
-#themeSelect {
-	width: 100%;
-	background: none;
-	border: none;
-	cursor: pointer;
-	font-family: var(--default-font);
-}
 @media (max-width: calc(1600px + 20px)) {
-	#dashboard, #logs {
+	#dashboard {
 		grid-template-columns: repeat(2, 1fr);
 		width: 1000px;
 	}
 }
 @media (max-width: calc(1100px + 20px)) {
-	#dashboard, #logs {
+	#dashboard {
 		grid-template-columns: repeat(2, 1fr);
 		width: 700px;
 	}
 }
 @media (max-width: calc(850px)) or (orientation: portrait){
-	#dashboard, #logs {
+	#dashboard {
 		grid-template-columns: 1fr;
 		width: 85vw;
 	}

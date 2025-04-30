@@ -6,17 +6,10 @@
 		<script defer src="scripts/built/formatPage.js"></script>
 		<script defer src="scripts/built/app.js"></script>
 	</head>
-	<body onload="start();" class="light">
+	<body onload="start();">
 		<noscript>You must turn on JavaScript to use this page.</noscript>
 		<header id="topBar">
 			<h1 class="header-large" id="name"><span class="skeleton-loader">insert server title here</span></h1>
-			<button id="themeButton" onclick="onThemeButtonClick();">
-				<svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"></svg>
-				<select id="themeSelect">
-					<option value="light">Light</option>
-					<option value="dark">Dark</option>
-				</select>
-			</button>
 		</header>
 		<main id="dashboard">
 			<div id="dashboardBackground"></div>
@@ -69,19 +62,6 @@
 					<ul id="players"></ul>
 				</div>
 			</section>
-		</main>
-		<main id="logs">
-
-			<section class="container">
-				<h3 class="label">Log</h3>
-				<button id="logAS" onclick="onLogASButtonClick();">
-					<svg id="asIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"></svg>
-				</button>
-
-				<ul id="log">
-				</ul>
-			</section>
-
 		</main>
 		<svg id="templateIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"></svg>
 	</body>
