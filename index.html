@@ -74,12 +74,16 @@
 
 			<section class="container">
 				<h3 class="label">Log</h3>
-				<button id="logAS" onclick="onLogASButtonClick();">
+				<button id="logAS" onclick="onLogASButtonClick();" style="display: none;">
 					<svg id="asIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"></svg>
 				</button>
 
 				<ul id="log">
 				</ul>
+				<form id="logInputWrapper">
+					<input type="text" id="logIn" placeholder="Command input" class="continer" autocomplete="off">
+					<button type="submit" id="logSend">Send</button>
+				</form>
 			</section>
 
 		</main>

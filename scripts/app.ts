@@ -102,6 +102,7 @@ async function updatePage() {
 	});
 
 	document.getElementById("log").innerHTML = "";
+	data.log.reverse();
 	data.log.forEach((value, index) => {
 		let li = document.createElement("li");
 		li.innerText = value;
@@ -112,7 +113,7 @@ async function updatePage() {
 	}
 }
 
-var autoScroll = true
+var autoScroll = false
 function onLogASButtonClick() {
 	autoScroll = !autoScroll;
 	document.getElementById("asIcon").innerHTML = asIcons[autoScroll as unknown as string];
@@ -121,6 +122,17 @@ function onLogASButtonClick() {
 function onThemeButtonClick() {
 	document.getElementById("themeSelect").click();
 }
+
+document.getElementById("logInputWrapper").addEventListener("submit", (e) => {
+	const inputText: string = (document.getElementById("logIn") as HTMLInputElement).value;
+	if (!(inputText.trim().length <= 0)) {
+		const xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", serverAddr + "/execute");
+		xmlhttp.send(inputText);
+		(document.getElementById("logIn") as HTMLInputElement).value = "";
+	}
+	e.preventDefault();
+});
 
 function start() {
 	document.getElementById("asIcon").innerHTML = asIcons[autoScroll as unknown as string];

@@ -109,6 +109,7 @@ function updatePage() {
                         document.getElementById("players").appendChild(element);
                     });
                     document.getElementById("log").innerHTML = "";
+                    data.log.reverse();
                     data.log.forEach(function (value, index) {
                         var li = document.createElement("li");
                         li.innerText = value;
@@ -122,7 +123,7 @@ function updatePage() {
         });
     });
 }
-var autoScroll = true;
+var autoScroll = false;
 function onLogASButtonClick() {
     autoScroll = !autoScroll;
     document.getElementById("asIcon").innerHTML = asIcons[autoScroll];
@@ -130,6 +131,16 @@ function onLogASButtonClick() {
 function onThemeButtonClick() {
     document.getElementById("themeSelect").click();
 }
+document.getElementById("logInputWrapper").addEventListener("submit", function (e) {
+    var inputText = document.getElementById("logIn").value;
+    if (!(inputText.trim().length <= 0)) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", serverAddr + "/execute");
+        xmlhttp.send(inputText);
+        document.getElementById("logIn").value = "";
+    }
+    e.preventDefault();
+});
 function start() {
     document.getElementById("asIcon").innerHTML = asIcons[autoScroll];
     if (localStorage.getItem("theme") != null) {

@@ -15,6 +15,9 @@ body {
 	font-optical-sizing: auto;
 	padding: 0;
 }
+body input {
+	color: black;
+}
 body.dark {
 	--grey1: #313131;
 	--grey2: #3e3e3e;
@@ -22,6 +25,9 @@ body.dark {
 	--bk2: #1e1e1e;
 	--accentColor1: #74dd1d;
 	--accentColor2: #72f109;
+	color: white;
+}
+body.dark input {
 	color: white;
 }
 
@@ -172,6 +178,8 @@ body.dark {
 	word-break: break-all;
 	height: 473px;
 	max-height: none;
+	display: flex;
+	flex-direction: column-reverse;
 }
 #log > li {
 	list-style-type: none;
@@ -191,7 +199,38 @@ body.dark {
 	display: flex;
 }
 .container:has(#log) {
-	height: 500px;
+	height: 540px;
+}
+#logIn {
+	border: 1px solid var(--accentColor2);
+	border-radius: var(--border-radius-1);
+	padding: 9px;
+	width: calc(100% - 18px);
+	height: 100%;
+	box-sizing: border-box;
+	background-color: var(--bk1);
+	font-family: var(--default-font);
+}
+#logSend {
+	border: 1px solid var(--accentColor2);
+	background-color: var(--accentColor1);
+	border-radius: var(--border-radius-1);
+	padding: 9px;
+	margin-left: 9px;
+	height: 100%;
+	cursor: pointer;
+	font-family: var(--default-font);
+}
+#logSend:active {
+	border: 1px solid var(--accentColor1);
+	background-color: var(--accentColor2);
+}
+#logInputWrapper {
+	display: flex;
+	flex-direction: row;
+	height: 36px;
+	position: relative;
+	margin-top: 9px;
 }
 
 #themeButton {
